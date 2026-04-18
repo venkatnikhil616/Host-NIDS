@@ -2,12 +2,11 @@ import sys
 import time
 
 class Animations:
-    def __init__(self):  
-      self.spinner_frames = ["|", "/", "-", "\\"]
-      
-    # LOADING SPINNER
+    def __init__(self):
+        self.spinner_frames = ["|", "/", "-", "\\"]
 
-  def spinner(self, text="Loading", duration=3):
+    # LOADING SPINNER
+    def spinner(self, text="Loading", duration=3):
         end_time = time.time() + duration
         i = 0
 
@@ -19,9 +18,9 @@ class Animations:
             i += 1
 
         sys.stdout.write("\r" + " " * (len(text) + 5) + "\r")
+        sys.stdout.flush()
 
     # PROGRESS BAR
-
     def progress_bar(self, total=100, delay=0.02):
         for i in range(total + 1):
             percent = i
@@ -30,27 +29,22 @@ class Animations:
             sys.stdout.flush()
             time.sleep(delay)
 
-        print()  # move to next line
+        print()
 
     # BLINK TEXT (ALERTS)
-
     def blink(self, text, times=3, interval=0.4):
         for _ in range(times):
-            # show
             sys.stdout.write(f"\r\033[91m{text}\033[0m")
             sys.stdout.flush()
             time.sleep(interval)
 
-            # hide
             sys.stdout.write("\r" + " " * len(text))
             sys.stdout.flush()
             time.sleep(interval)
 
-        # final visible
         print(f"\r\033[91m{text}\033[0m")
 
     # FADE-IN TEXT
-
     def fade_in(self, text, delay=0.05):
         for char in text:
             sys.stdout.write(char)
@@ -59,7 +53,6 @@ class Animations:
         print()
 
     # TYPEWRITER EFFECT
-
     def typewriter(self, text, delay=0.04):
         for char in text:
             sys.stdout.write(char)
@@ -68,7 +61,6 @@ class Animations:
         print()
 
     # SECTION LOADER (STARTUP)
-  
     def startup_sequence(self):
         self.typewriter("🔐 Initializing HIDS System...")
         self.spinner("Loading modules", 2)
